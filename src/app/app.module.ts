@@ -1,6 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+// Permite realizar peticion put get post etc
+// Lo explica en la Seccion 4 Clase 26
+import { HttpClientModule } from '@angular/common/http';
+
+
 // routes
 import { AppRoutingModule } from './app-routing.module';
 
@@ -24,7 +29,8 @@ import { ItemComponent } from './pages/item/item.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
