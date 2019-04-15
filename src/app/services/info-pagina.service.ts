@@ -1,6 +1,7 @@
 import { InfoPagina } from './../interfaces/info-pagina.interface';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Equipo } from '../interfaces/equipo.interface';
 
 
 
@@ -14,23 +15,32 @@ export class InfoPaginaService {
   // Para dejarlas como no obligatorias
   // Seccion 4 Clase 27
   info: InfoPagina = {};
-  cargada = false;
+  cargando = true;
+  equipo: Equipo[] = [];
 
   constructor(private http: HttpClient) {
-    // console.log('Entrando al constructor del servicio InfoPaginaService');
+    this.cargarInfo();
+    this.cargarEquipo();
+  }
+
+  // Leer el Archivo Json
+  // Para hacer peticiones get, post etc
+  // Se debe Importar el Http app.module.ts
+  // Lo explica en la Seccion 4 Clase 26
+
+  private cargarInfo() {
     this.http.get('assets/data/data-pagina.json')
       .subscribe((resp: InfoPagina) => {
-        // console.log(resp['titulo']);
-        // console.log(resp.titulo);
         this.info = resp;
-        this.cargada = true;
-        console.log(resp);
+        this.cargando = false;
       });
-   }
+  }
 
-   // Leer el Archivo Json
-   // Se debe Importar el Http app.module.ts
-   // Lo explica en la Seccion 4 Clase 26
-
-
+  private cargarEquipo() {
+    this.http.get('https://paginaportafolio-1a0bb.firebaseio.com/equipo.json')
+      .subscribe((resp: Equipo[]) => {
+        this.equipo = resp;
+        this.cargando = false;
+    });
+  }
 }
