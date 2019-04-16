@@ -7,26 +7,32 @@ import { Producto } from '../interfaces/producto.interface';
 })
 export class ProductosService {
   cargando = true;
-  productos : Producto[] = [];
-  constructor(private http: HttpClient) { 
+  productos: Producto[] = [];
+  productosFiltrado: Producto[] = [];
+  constructor(private http: HttpClient) {
     this.cargarProductos();
   }
 
-  private cargarProductos(){
-    
+  private cargarProductos() {
     this.http.get("https://paginaportafolio-1a0bb.firebaseio.com/producto_idx.json")
-              .subscribe(
-                (resp:Producto[]) => {
-                  this.productos = resp;
-                  setTimeout(()=>{
-                    this.cargando = false;
-                  },2000);
-                }
-              );
+      .subscribe(
+        (resp: Producto[]) => {
+          this.productos = resp;
+          setTimeout(() => {
+            this.cargando = false;
+          }, 2000);
+        }
+      );
   }
 
-  public getProducto(id : string){
-    //esto lo explica en la  Seccion 7 clase 45
-    return this.http.get(`https://paginaportafolio-1a0bb.firebaseio.com/productos/${ id }.json`);
+  getProducto(id: string) {
+    // esto lo explica en la  Seccion 7 clase 45
+    return this.http.get(`https://paginaportafolio-1a0bb.firebaseio.com/productos/${id}.json`);
   }
+
+  buscarProducto(terminio: string) {
+    this.productosFiltrado = this.productos.filter(
+      producto => { return true });
+  }
+
 }
