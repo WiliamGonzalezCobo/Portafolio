@@ -13,16 +13,20 @@ export class ProductosService {
   }
 
   private cargarProductos(){
+    
     this.http.get("https://paginaportafolio-1a0bb.firebaseio.com/producto_idx.json")
               .subscribe(
                 (resp:Producto[]) => {
                   this.productos = resp;
-
                   setTimeout(()=>{
                     this.cargando = false;
                   },2000);
-                  
                 }
               );
+  }
+
+  public getProducto(id : string){
+    //esto lo explica en la  Seccion 7 clase 45
+    return this.http.get(`https://paginaportafolio-1a0bb.firebaseio.com/productos/${ id }.json`);
   }
 }
