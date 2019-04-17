@@ -6,5 +6,6 @@ export interface InfoPagina {
   facebook?: string;
   twitter?: string;
   linkedlin?: string;
+  github?: string;
   equipo_trabajo?: any[];
 }

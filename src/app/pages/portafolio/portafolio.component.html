@@ -28,8 +28,8 @@
     <a *ngFor="let producto of productosService.productos" [routerLink]="['/item',producto.cod]" class="rk-item ae-masonry__item">
       <img [src]="producto.url" alt="">
       <div class="item-meta">
-        <h2>Essential Stationery</h2>
-        <p>Branding</p>
+        <h2>{{producto.titulo}}</h2>
+        <p>{{producto.categoria}}</p>
       </div>
     </a>
   </div>
